@@ -1,0 +1,16 @@
+name: adt
+description: A new Flutter package project.
+version: 0.0.1
+homepage: https://github.com/vr19860507/adt
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  adt_annotation:
+    git: https://github.com/vr19860507/adt_annotation
+  code_builder: ^3.3.0
+  source_gen: ^0.9.5
+
+dev_dependencies:
+  strict_dart: ^2.0.0
