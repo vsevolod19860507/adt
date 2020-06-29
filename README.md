@@ -1,6 +1,6 @@
 # adt
 
-A new Flutter package project.
+A code generator for algebraic data types such as data classes and distinguishable unions.
 
 ## Getting Started
 
