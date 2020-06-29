@@ -1,3 +1,13 @@
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+          - unnecessary_brace_in_string_interps
+          - unused_element
+          - unnecessary_parenthesis
+
 builders:
    generator_app:
     import: 'package:adt/builder.dart'

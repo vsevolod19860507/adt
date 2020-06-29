@@ -17,19 +17,13 @@ class ADTGenerator extends GeneratorForAnnotation<ADT> {
         .firstWhere((n) => n == 'data' || n == 'union', orElse: () => '');
 
     if (typeOfGneratedContent == 'data') {
-      return ignoreForFile + generateDataClass(element);
+      return generateDataClass(element);
     }
 
     if (typeOfGneratedContent == 'union') {
-      return ignoreForFile + generateUnionClass(element);
+      return generateUnionClass(element);
     }
 
     return null;
   }
 }
-
-const ignoreForFile = '// ignore_for_file: '
-    'unnecessary_brace_in_string_interps,'
-    'unnecessary_parenthesis,'
-    'unused_element,'
-    '\n';

@@ -216,7 +216,7 @@ String createDataClass(ClassInfo classInfo) {
       '// **************************************************************************\n';
 
   final marker =
-      '// ${classNameWithTypeParametersAndBounds.accept(emitter)}\n$stars';
+      '$stars// ${classNameWithTypeParametersAndBounds.accept(emitter)}\n$stars';
 
   return marker + dataClassMixin + dataClassExtension;
 }
