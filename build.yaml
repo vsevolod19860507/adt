@@ -1,7 +1,7 @@
 builders:
    generator_app:
     import: 'package:adt/builder.dart'
-    builder_factories: ['codeGeneratorBuilder']
+    builder_factories: ['adtGeneratorBuilder']
     build_extensions: { '.dart': ['.adt.g.dart'] }
     auto_apply: root_package
     build_to: cache

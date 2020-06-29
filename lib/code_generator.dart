@@ -8,7 +8,7 @@ import 'code_generator_data.dart';
 import 'code_generator_union.dart';
 
 @immutable
-class CodeGenerator extends GeneratorForAnnotation<ADT> {
+class ADTGenerator extends GeneratorForAnnotation<ADT> {
   @override
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
@@ -17,13 +17,19 @@ class CodeGenerator extends GeneratorForAnnotation<ADT> {
         .firstWhere((n) => n == 'data' || n == 'union', orElse: () => '');
 
     if (typeOfGneratedContent == 'data') {
-      return generateDataClass(element);
+      return ignoreForFile + generateDataClass(element);
     }
 
     if (typeOfGneratedContent == 'union') {
-      return generateUnionClass(element);
+      return ignoreForFile + generateUnionClass(element);
     }
 
     return null;
   }
 }
+
+const ignoreForFile = '// ignore_for_file: '
+    'unnecessary_brace_in_string_interps,'
+    'unnecessary_parenthesis,'
+    'unused_element,'
+    '\n';

@@ -3,5 +3,5 @@ import 'package:build/build.dart';
 
 import 'code_generator.dart';
 
-Builder codeGeneratorBuilder(BuilderOptions options) =>
-    SharedPartBuilder([CodeGenerator()], 'generator_app');
+Builder adtGeneratorBuilder(BuilderOptions options) =>
+    SharedPartBuilder([ADTGenerator()], 'generator_app');

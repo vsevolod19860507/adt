@@ -347,7 +347,7 @@ String createUnionClass(ClassInfo classInfo) {
       '// **************************************************************************\n';
 
   final marker =
-      '$stars// ${classNameWithTypeParametersAndBounds.accept(emitter)}\n$stars';
+      '// ${classNameWithTypeParametersAndBounds.accept(emitter)}\n$stars';
 
   return marker + unionClassExtension + unionClassBehind + unionCases;
 }
