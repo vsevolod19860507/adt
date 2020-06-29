@@ -4,8 +4,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:build/build.dart';
 
-import 'code_generator_data.dart';
-import 'code_generator_union.dart';
+import 'adt_generator_data.dart';
+import 'adt_generator_union.dart';
 
 @immutable
 class ADTGenerator extends GeneratorForAnnotation<ADT> {

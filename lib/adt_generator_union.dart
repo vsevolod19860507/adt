@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 
-import 'code_generator_helpers.dart';
+import 'adt_generator_helpers.dart';
 
 @immutable
 class ClassInfo {
