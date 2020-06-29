@@ -13,4 +13,4 @@ dependencies:
   source_gen: ^0.9.5
 
 dev_dependencies:
-  strict_dart: ^2.0.0
+  strict_analyzer: ^0.0.1
