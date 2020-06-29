@@ -4,13 +4,28 @@ A code generator for algebraic data types such as data classes and discriminated
 
 ## Getting Started
 
+You should install three packages as dependencies:
+
+- [adt_annotation](https://pub.dev/packages/adt_annotation)
+- adt
+- [build_runner](https://pub.dev/packages/build_runner)
+
+```yaml
+dependencies:
+  adt_annotation: ^0.0.1
+
+dev_dependencies:
+  adt: ^0.0.1
+  build_runner: ^1.10.0
+```
+
+Then, in the file for which you want to generate the code, add the following:
+
+```dart
+import 'package:adt_annotation/adt_annotation.dart';
+
+part 'your_file_name.g.dart';
+```
+
+
 Description will be soon
-
-<!-- This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference. -->
