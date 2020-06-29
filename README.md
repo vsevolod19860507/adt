@@ -1,6 +1,6 @@
 # adt
 
-A code generator for algebraic data types such as data classes and distinguishable unions.
+A code generator for algebraic data types such as data classes and discriminated unions.
 
 ## Getting Started
 
