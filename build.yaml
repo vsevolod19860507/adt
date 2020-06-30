@@ -1,6 +1,6 @@
 builders:
    adt:
-      import: 'package:adt/builder.dart'
+      import: 'package:adt/adt.dart'
       builder_factories: ['adtGeneratorBuilder']
       build_extensions: { '.dart': ['.adt.g.dart'] }
       auto_apply: root_package

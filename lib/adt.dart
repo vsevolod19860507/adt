@@ -2,7 +2,7 @@ import 'package:source_gen/source_gen.dart';
 import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
 
-import 'adt_generator.dart';
+import 'src/adt_generator.dart';
 
 Builder adtGeneratorBuilder(BuilderOptions options) => SharedPartBuilder(
       [ADTGenerator()],
