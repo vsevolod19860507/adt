@@ -397,8 +397,11 @@ Method createCopyWith(
                   .map((p) => MapEntry(
                         p.name,
                         p.isNullable
-                            ? Reference(p.name).ifNullThen(
-                                const Reference('this').property(p.name))
+                            ? Reference(p.name)
+                                .equalTo(const Reference('unused'))
+                                .conditional(
+                                    const Reference('this').property(p.name),
+                                    Reference(p.name).asA(Reference(p.type)))
                             : Reference(p.name).ifNullThen(
                                 const Reference('this').property(p.name)),
                       ))),
