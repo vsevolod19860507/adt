@@ -1,6 +1,6 @@
 name: adt
 description: A code generator for algebraic data types such as data classes and discriminated unions.
-version: 0.0.1+2
+version: 0.0.1+3
 homepage: https://github.com/vr19860507/adt
 
 environment:
@@ -16,4 +16,4 @@ dependencies:
   adt_annotation: ^0.0.1
 
 dev_dependencies:
-  strict_analyzer: ^0.0.1
+  strict_analyzer: ^0.1.0
