@@ -66,12 +66,12 @@ String generateDataClass(Element element) {
   final dataClass = element as ClassElement;
 
   final constructors =
-      dataClass.constructors.where((c) => !c.isDefaultConstructor);
+      dataClass.constructors.where((c) => c.parameters.isNotEmpty);
 
   if (constructors.isEmpty) {
     throw InvalidGenerationSourceErrorWithTodo(
-      'The data class must contain at least one non-default constructor.',
-      todo: 'Add a constructor.',
+      'A data class must contain at least one constructor with at least one parameter.',
+      todo: 'Add a constructor with at least one parameter.',
       element: dataClass,
     );
   }
@@ -114,13 +114,13 @@ String generateDataClass(Element element) {
     );
   });
 
-  if (parameters.isEmpty) {
-    throw InvalidGenerationSourceErrorWithTodo(
-      'The primary constructor must contain at least one parameter.',
-      todo: 'Add a parameter.',
-      element: primaryConstructor,
-    );
-  }
+  // if (parameters.isEmpty) {
+  //   throw InvalidGenerationSourceErrorWithTodo(
+  //     'The primary constructor must contain at least one parameter.',
+  //     todo: 'Add a parameter.',
+  //     element: primaryConstructor,
+  //   );
+  // }
 
   final typeParameters = dataClass.typeParameters.map((tp) => TypeParameterInfo(
         name: tp.displayName,
@@ -166,10 +166,6 @@ String createDataClass(ClassInfo classInfo) {
       ..symbol = classInfo.name
       ..types.addAll(typeParametersWithBounds),
   );
-
-  // final asserts = classInfo.constructor.parameters
-  //     .where((p) => !p.isNullable)
-  //     .map((p) => Code('assert(${p.name} != null)'));
 
   final mixinMethods = [
     createThis(classInfo, classNameWithTypeParameters),
