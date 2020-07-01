@@ -56,9 +56,8 @@ analyzer:
 ```
 
 ## Data class
-The data class overrides `==`, `hashCode`, `toString`. It also creates a `copyWith` method. The fields that will be used in them must be described as constructor parameters, these can be any type of parameters. Constructor must contain at least one parameter.
-
-To create a data class, use the `@data` annotation, this will create an immutable data class.
+The data class overrides `==`, `hashCode`, `toString`, it also creates a `copyWith` method (You can always manually override them if you want). To create an immutable data class, use the `@data` annotation on `DataClassName with _$DataClassName` and add a constructor with some parameters. You can place the fields either in the data class itself, or inherit them from somewhere. But in any case, the constructor parameters must have the same names as the corresponding fields. Constructor must contain at least one parameter.
+You can also freely add any other members to a data class, such as fields, methods, etc.
 
 ```dart
 @data
@@ -106,8 +105,21 @@ class User with _$User {
 }
 ```
 
-<!-- You can use more than one constructor, but in this case one of them must have the `@primary` annotation. -->
+You can use more than one constructor, but in this case one of them must have the `@primary` annotation. And its parameters will be used to generate the data class.
 
+```dart
+@data
+class User with _$User {
+  final String name;
+  final int age;
+
+  const User(String name) : this.withAge(name);
+
+  @primary
+  const User.withAge(this.name, [@nullable this.age = 34])
+      : assert(name != null);
+}
+```
 
 
 

@@ -1,3 +1,7 @@
+## [0.0.1+8] - Jul 01, 2020
+
+* Fixed README.md
+
 ## [0.0.1+7] - Jul 01, 2020
 
 * Internal fixes.
