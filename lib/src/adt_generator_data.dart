@@ -70,7 +70,7 @@ String generateDataClass(Element element) {
 
   if (constructors.isEmpty) {
     throw InvalidGenerationSourceErrorWithTodo(
-      'A data class must contain at least one constructor with at least one parameter.',
+      'A data class must contain a constructor with at least one parameter.',
       todo: 'Add a constructor with at least one parameter.',
       element: dataClass,
     );
@@ -100,10 +100,29 @@ String generateDataClass(Element element) {
   final primaryConstructor = primaryConstructors.first;
 
   final parameters = primaryConstructor.parameters.map((p) {
+    if (p.isPrivate) {
+      throw InvalidGenerationSourceErrorWithTodo(
+        'Parameters should not be private.',
+        todo: 'Make the parameter public.',
+        element: p,
+      );
+    }
+
     final isRequired =
         p.isNotOptional || p.metadata.any((e) => e.element.name == 'required');
 
     final isNullable = p.metadata.any((e) => e.element.name == 'nullable');
+
+    final hasDefaultValue = (p.defaultValueCode ?? 'null') != 'null';
+
+    if (!isNullable && !isRequired && !hasDefaultValue) {
+      throw InvalidGenerationSourceErrorWithTodo(
+        'The non-nullable optional parameter must have a default value.',
+        todo:
+            'Add a default value or make this parameter @nullable, or if it is a named parameter, you may also make it @required.',
+        element: p,
+      );
+    }
 
     return ParameterInfo(
       name: p.name,
@@ -113,14 +132,6 @@ String generateDataClass(Element element) {
       isNullable: isNullable,
     );
   });
-
-  // if (parameters.isEmpty) {
-  //   throw InvalidGenerationSourceErrorWithTodo(
-  //     'The primary constructor must contain at least one parameter.',
-  //     todo: 'Add a parameter.',
-  //     element: primaryConstructor,
-  //   );
-  // }
 
   final typeParameters = dataClass.typeParameters.map((tp) => TypeParameterInfo(
         name: tp.displayName,
@@ -364,6 +375,13 @@ Method createCopyWith(
         ),
     );
 
+    Expression createParameterForConstructor(ParameterInfo p) => p.isNullable
+        ? Reference(p.name).equalTo(const Reference('unused')).conditional(
+            const Reference('this').property(p.name),
+            Reference(p.name).asA(Reference(p.type)))
+        : Reference(p.name)
+            .ifNullThen(const Reference('this').property(p.name));
+
     final body = Method(
       (b) => b
         ..lambda = true
@@ -384,26 +402,14 @@ Method createCopyWith(
         ..body = Reference(classInfo.name)
             .newInstanceNamed(
               constructorName,
-              classInfo.constructor.parameters.where((p) => !p.isNamed).map(
-                  (p) => p.isNullable
-                      ? Reference(p.name)
-                          .equalTo(const Reference('unused'))
-                          .conditional(const Reference('this').property(p.name),
-                              Reference(p.name).asA(Reference(p.type)))
-                      : Reference(p.name).ifNullThen(
-                          const Reference('this').property(p.name))),
+              classInfo.constructor.parameters
+                  .where((p) => !p.isNamed)
+                  .map(createParameterForConstructor),
               Map.fromEntries(classInfo.constructor.parameters
                   .where((p) => p.isNamed)
                   .map((p) => MapEntry(
                         p.name,
-                        p.isNullable
-                            ? Reference(p.name)
-                                .equalTo(const Reference('unused'))
-                                .conditional(
-                                    const Reference('this').property(p.name),
-                                    Reference(p.name).asA(Reference(p.type)))
-                            : Reference(p.name).ifNullThen(
-                                const Reference('this').property(p.name)),
+                        createParameterForConstructor(p),
                       ))),
             )
             .code,
@@ -426,18 +432,20 @@ Method createCopyWith(
           ..type = Reference(p.type),
       ));
 
+  Expression createParameterForConstructor(ParameterInfo p) =>
+      Reference(p.name).ifNullThen(const Reference('this').property(p.name));
+
   final body = Reference(classInfo.name)
       .newInstanceNamed(
         constructorName,
-        classInfo.constructor.parameters.where((p) => !p.isNamed).map((p) =>
-            Reference(p.name)
-                .ifNullThen(const Reference('this').property(p.name))),
+        classInfo.constructor.parameters
+            .where((p) => !p.isNamed)
+            .map(createParameterForConstructor),
         Map.fromEntries(classInfo.constructor.parameters
             .where((p) => p.isNamed)
             .map((p) => MapEntry(
                   p.name,
-                  Reference(p.name)
-                      .ifNullThen(const Reference('this').property(p.name)),
+                  createParameterForConstructor(p),
                 ))),
       )
       .code;

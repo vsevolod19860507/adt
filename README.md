@@ -12,10 +12,10 @@ You should install three packages as dependencies:
 
 ```yaml
 dependencies:
-  adt_annotation: ^0.0.1
+  adt_annotation: ^0.1.0
 
 dev_dependencies:
-  adt: ^0.0.1
+  adt: ^0.1.0
   build_runner: ^1.10.0
 ```
 
@@ -56,29 +56,41 @@ analyzer:
 ```
 
 ## Data class
-The data class overrides `==`, `hashCode`, `toString`, it also creates a `copyWith` method (You can always manually override them if you want). To create an immutable data class, use the `@data` annotation on `DataClassName with _$DataClassName` and add a constructor with some parameters. You can place the fields either in the data class itself, or inherit them from somewhere. But in any case, the constructor parameters must have the same names as the corresponding fields. Constructor must contain at least one parameter.
-You can also freely add any other members to a data class, such as fields, methods, etc.
+The data class сontains fields that are used in `==`, `hashCode`, `toString`, `copyWith` which it creates for you. (You can always manually override them if you want). To create an immutable data class, use the `@data` annotation on `DataClassName with _$DataClassName` and add a constructor with some parameters. You can place the corresponding fields either in the data class itself, or inherit them from somewhere. But in any case, the constructor parameters must have the same names as the corresponding fields, these parameters and fields must be public. The constructor must contain at least one parameter.
 
 ```dart
 @data
-class User with _$User {
+class User1 with _$User1 {
   final String name;
   final int age;
 
-  const User({@required this.name, @required this.age})
+  const User1({@required this.name, @required this.age})
+      : assert(name != null),
+        assert(age != null);
+}
+
+@data
+class _User2 with _$_User2 {
+  final String name;
+  final int age;
+
+  const _User2({@required this.name, @required this.age})
       : assert(name != null),
         assert(age != null);
 }
 ```
 
-A `copyWith` method allows you to create a copy of an object with the ability to change fields values.
+A `copyWith` method allows you to create a copy of an object with the ability to change fields values. If the data class or constructor is private, then the `_copyWith` will also be private.
 
 ```dart
-const user1 = User('Vsevolod', 34); // name: 'Vsevolod', age: 34
-final user2 = user1.copyWith(name: 'Other Name'); // name: 'Other Name', age: 34
+const user1 = User1('Vsevolod', 34); // name: 'Vsevolod', age: 34
+final otherUser1 = user1.copyWith(name: 'Other Name'); // name: 'Other Name', age: 34
+
+const user2 = _User2('Vsevolod', 34); // name: 'Vsevolod', age: 34
+final otherUser2 = user2._copyWith(name: 'Other Name'); // name: 'Other Name', age: 34
 ```
 
-If you need mutable fields, add the `@mutable` annotation.
+If you need mutable fields, add the `@mutable` annotation. This will remove the `@immutable` annotation from the created mixin.
 
 ```dart
 @data
@@ -93,7 +105,7 @@ class User with _$User {
 }
 ```
 
-If you need a nullable field, add the `@nullable` annotation to the parameter. This is necessary for a `copyWith` method to work properly in order to be able to set the value of a nullable field to null.
+If you need a nullable field, add the `@nullable` annotation to the parameter. This also is necessary for a `copyWith` method to work properly in order to be able to set the value of a nullable field to null.
 
 ```dart
 @data
@@ -121,6 +133,64 @@ class User with _$User {
 }
 ```
 
+You can freely apply generics to your `DataClassName<T> with _$DataClassName<T>` and also add any other members to a data class, such as fields, methods, etc.
 
+```dart
+abstract class Data {
+  int get value;
+}
+
+@data
+class Address with _$Address {
+  final String country;
+  final String city;
+  final String addressLine1;
+  final String addressLine2;
+  final String addressLine3;
+
+  const Address(
+    this.country,
+    this.city,
+    this.addressLine1, [
+    @nullable this.addressLine2,
+    @nullable this.addressLine3,
+  ])  : assert(country != null),
+        assert(city != null),
+        assert(addressLine1 != null);
+}
+
+@data
+@mutable
+class _UserBase with _$_UserBase {
+  final String name;
+  final int age;
+
+  const _UserBase(this.name, this.age)
+      : assert(name != null),
+        assert(age != null);
+}
+
+@data
+@mutable
+class User<T extends num, S extends Data> extends _UserBase with _$User<T, S> {
+  Address address;
+  T weigh;
+  final S someField;
+
+  S otherField1;
+  S otherField2;
+
+  User({
+    @required String name,
+    @required int age,
+    @nullable this.address,
+    @nullable this.weigh,
+    @required this.someField,
+  })  : assert(someField != null),
+        super(name, age);
+
+  void someMethod() {}
+}
+```
 
 _Description will be soon..._

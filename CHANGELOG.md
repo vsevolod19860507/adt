@@ -1,3 +1,9 @@
+## [0.1.0] - Jul 02, 2020
+
+* Fixed README.md
+* Internal fixes.
+* Dependencies Updated
+
 ## [0.0.1+8] - Jul 01, 2020
 
 * Fixed README.md
