@@ -1,6 +1,6 @@
-## [0.1.0+2] - Jul 04, 2020
+## [0.2.0] - Jul 04, 2020
 
-* Fixed README.md
+* Internal fixes.
 * Fixed example.
 
 ## [0.1.0+1] - Jul 04, 2020

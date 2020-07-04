@@ -4,6 +4,12 @@ void main() {
   const dc1 = DataClass(field1: 7);
   final dc2 = dc1.copyWith(field1: 1);
   final dc3 = dc1.copyWith(field1: 1, field2: null);
+  print(dc1.hashCode); // 1286781335
+  print(dc2.hashCode); // 119482181
+  print(dc3.hashCode); // 119482181
+  print(dc1 == dc2); // false
+  print(dc1 == dc3); // false
+  print(dc2 == dc2); // true
   print(dc1); // DataClass(field1: 7, field2: default value)
   print(dc2); // DataClass(field1: 1, field2: default value)
   print(dc3); // DataClass(field1: 1, field2: default value)
@@ -25,11 +31,9 @@ void main() {
 
   // const dcwpc1 = DataClassWithPrivateConstructor._(7);
   // final dcwpc2 = dcwpc1._copyWith(field1: 1);
-  final result = DataClassWithPrivateConstructor.create(7, 'A');
-  final dcwpc3 = result.keys.first;
-  final date = result.values.first;
-  print(dcwpc3); // DataClassWithPrivateConstructor(field1: 7, field2: A)
-  print(date); // 2020-07-04 21:06:46.902073
+  final dcwpc3 = DataClassWithPrivateConstructor.create(7, 'A');
+  print(dcwpc3.key); // DataClassWithPrivateConstructor(field1: 7, field2: A)
+  print(dcwpc3.value); // 2020-07-04 21:06:46.902073
 
   final mdc1 = MutableDataClass(field1: 7);
   print(mdc1); // MutableDataClass(field1: 7, field2: null)

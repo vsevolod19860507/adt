@@ -18,7 +18,8 @@ mixin _$DataClass {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is DataClass &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is DataClass &&
             const DeepCollectionEquality().equals(
                 [$this.field1, $this.field2], [other.field1, other.field2]);
   }
@@ -27,7 +28,7 @@ mixin _$DataClass {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+        .hash([$this.runtimeType.hashCode, $this.field1, $this.field2]);
   }
 
   @override
@@ -52,7 +53,8 @@ mixin _$DataClassWithNullableField {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is DataClassWithNullableField &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is DataClassWithNullableField &&
             const DeepCollectionEquality().equals(
                 [$this.field1, $this.field2], [other.field1, other.field2]);
   }
@@ -61,7 +63,7 @@ mixin _$DataClassWithNullableField {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+        .hash([$this.runtimeType.hashCode, $this.field1, $this.field2]);
   }
 
   @override
@@ -89,7 +91,8 @@ mixin _$GenericDataClass<T, S extends Iterable<T>> {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is GenericDataClass<T, S> &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is GenericDataClass<T, S> &&
             const DeepCollectionEquality().equals(
                 [$this.field1, $this.field2], [other.field1, other.field2]);
   }
@@ -98,7 +101,7 @@ mixin _$GenericDataClass<T, S extends Iterable<T>> {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+        .hash([$this.runtimeType.hashCode, $this.field1, $this.field2]);
   }
 
   @override
@@ -124,7 +127,8 @@ mixin _$_PrivateDataClass {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is _PrivateDataClass &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is _PrivateDataClass &&
             const DeepCollectionEquality().equals(
                 [$this.field1, $this.field2], [other.field1, other.field2]);
   }
@@ -133,7 +137,7 @@ mixin _$_PrivateDataClass {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+        .hash([$this.runtimeType.hashCode, $this.field1, $this.field2]);
   }
 
   @override
@@ -161,7 +165,8 @@ mixin _$DataClassWithPrivateConstructor {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is DataClassWithPrivateConstructor &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is DataClassWithPrivateConstructor &&
             const DeepCollectionEquality().equals(
                 [$this.field1, $this.field2], [other.field1, other.field2]);
   }
@@ -170,7 +175,7 @@ mixin _$DataClassWithPrivateConstructor {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+        .hash([$this.runtimeType.hashCode, $this.field1, $this.field2]);
   }
 
   @override
@@ -197,7 +202,8 @@ mixin _$MutableDataClass {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is MutableDataClass &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is MutableDataClass &&
             const DeepCollectionEquality().equals(
                 [$this.field1, $this.field2], [other.field1, other.field2]);
   }
@@ -206,7 +212,7 @@ mixin _$MutableDataClass {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+        .hash([$this.runtimeType.hashCode, $this.field1, $this.field2]);
   }
 
   @override
@@ -234,7 +240,8 @@ mixin _$MultipleConstructorDataClass {
   bool operator ==(Object other) {
     final $this = _this;
     return identical(this, other) ||
-        other is MultipleConstructorDataClass &&
+        identical($this.runtimeType, other.runtimeType) &&
+            other is MultipleConstructorDataClass &&
             const DeepCollectionEquality()
                 .equals([$this.field1], [other.field1]);
   }
@@ -243,7 +250,7 @@ mixin _$MultipleConstructorDataClass {
   int get hashCode {
     final $this = _this;
     return const DeepCollectionEquality()
-        .hash([runtimeType.hashCode, $this.field1]);
+        .hash([$this.runtimeType.hashCode, $this.field1]);
   }
 
   @override

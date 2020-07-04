@@ -251,7 +251,9 @@ Method createHashCode(ClassInfo classInfo) {
             .property('hash')
             .call([
               literalList([
-                const Reference('runtimeType').property('hashCode'),
+                const Reference('\$this')
+                    .property('runtimeType')
+                    .property('hashCode'),
                 ...classInfo.constructor.parameters
                     .map((p) => const Reference('\$this').property(p.name))
               ]),
@@ -281,12 +283,12 @@ Method createEquals(
         const Reference('_this').assignFinal('\$this').statement,
         const Reference('identical')
             .call([const Reference('this'), const Reference('other')])
-            .or(const Reference('other')
-                .isA(classNameWithTypeParameters)
-                // .and(const Reference('identical').call([
-                //   const Reference('this').property('runtimeType'),
-                //   const Reference('other').property('runtimeType')
-                // ]))
+            .or(const Reference('identical')
+                .call([
+                  const Reference('\$this').property('runtimeType'),
+                  const Reference('other').property('runtimeType')
+                ])
+                .and(const Reference('other').isA(classNameWithTypeParameters))
                 .and(const Reference('DeepCollectionEquality')
                     .constInstance([])
                     .property('equals')
