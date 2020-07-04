@@ -80,6 +80,41 @@ extension $$DataClassWithNullableField on DataClassWithNullableField {
 }
 
 // *****************************************************************************
+// GenericDataClass<T,S extends Iterable<T>>
+// *****************************************************************************
+@immutable
+mixin _$GenericDataClass<T, S extends Iterable<T>> {
+  GenericDataClass<T, S> get _this => (this as GenericDataClass<T, S>);
+  @override
+  bool operator ==(Object other) {
+    final $this = _this;
+    return identical(this, other) ||
+        other is GenericDataClass<T, S> &&
+            const DeepCollectionEquality().equals(
+                [$this.field1, $this.field2], [other.field1, other.field2]);
+  }
+
+  @override
+  int get hashCode {
+    final $this = _this;
+    return const DeepCollectionEquality()
+        .hash([runtimeType.hashCode, $this.field1, $this.field2]);
+  }
+
+  @override
+  String toString() {
+    final $this = _this;
+    return 'GenericDataClass<${T}, ${S}>(field1: ${$this.field1}, field2: ${$this.field2})';
+  }
+}
+
+extension $$GenericDataClass<T, S extends Iterable<T>>
+    on GenericDataClass<T, S> {
+  GenericDataClass<T, S> copyWith({T field1, S field2}) =>
+      GenericDataClass(field1 ?? this.field1, field2 ?? this.field2);
+}
+
+// *****************************************************************************
 // _PrivateDataClass
 // *****************************************************************************
 @immutable
@@ -186,4 +221,39 @@ extension $$MutableDataClass on MutableDataClass {
       ({field1, Object field2 = unused}) => MutableDataClass(
           field1: field1 ?? this.field1,
           field2: field2 == unused ? this.field2 : (field2 as String));
+}
+
+// *****************************************************************************
+// MultipleConstructorDataClass
+// *****************************************************************************
+@immutable
+mixin _$MultipleConstructorDataClass {
+  MultipleConstructorDataClass get _this =>
+      (this as MultipleConstructorDataClass);
+  @override
+  bool operator ==(Object other) {
+    final $this = _this;
+    return identical(this, other) ||
+        other is MultipleConstructorDataClass &&
+            const DeepCollectionEquality()
+                .equals([$this.field1], [other.field1]);
+  }
+
+  @override
+  int get hashCode {
+    final $this = _this;
+    return const DeepCollectionEquality()
+        .hash([runtimeType.hashCode, $this.field1]);
+  }
+
+  @override
+  String toString() {
+    final $this = _this;
+    return 'MultipleConstructorDataClass(field1: ${$this.field1})';
+  }
+}
+
+extension _$$MultipleConstructorDataClass on MultipleConstructorDataClass {
+  MultipleConstructorDataClass _copyWith({int field1}) =>
+      MultipleConstructorDataClass._(field1 ?? this.field1);
 }

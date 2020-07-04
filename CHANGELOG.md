@@ -1,3 +1,8 @@
+## [0.1.0+2] - Jul 04, 2020
+
+* Fixed README.md
+* Fixed example.
+
 ## [0.1.0+1] - Jul 04, 2020
 
 * Fixed README.md
