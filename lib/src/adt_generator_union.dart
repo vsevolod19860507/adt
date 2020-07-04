@@ -343,13 +343,10 @@ String createUnionClass(ClassInfo classInfo) {
     ).accept(emitter).toString();
   }).join();
 
-  const stars =
-      '// **************************************************************************\n';
-
-  final marker =
+  final header =
       '$stars// ${classNameWithTypeParametersAndBounds.accept(emitter)}\n$stars';
 
-  return marker + unionClassExtension + unionClassBehind + unionCases;
+  return header + unionClassExtension + unionClassBehind + unionCases;
 }
 
 String clearUnderscores(String name) =>

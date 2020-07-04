@@ -219,13 +219,10 @@ String createDataClass(ClassInfo classInfo) {
       .replaceFirst('class', 'extension')
       .replaceFirst(' implements ', ' on ');
 
-  const stars =
-      '// **************************************************************************\n';
-
-  final marker =
+  final header =
       '$stars// ${classNameWithTypeParametersAndBounds.accept(emitter)}\n$stars';
 
-  return marker + dataClassMixin + dataClassExtension;
+  return header + dataClassMixin + dataClassExtension;
 }
 
 Method createThis(

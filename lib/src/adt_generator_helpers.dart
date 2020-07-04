@@ -3,6 +3,8 @@ import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
 
+final stars = '// ${'*' * 77}\n';
+
 @immutable
 class InvalidGenerationSourceErrorWithTodo
     extends InvalidGenerationSourceError {
