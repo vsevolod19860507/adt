@@ -79,7 +79,7 @@ String generateUnionClass(Element element) {
   if (unionClass.constructors.length >
       constructors.length + (mayHaveAdditionalMembers ? 1 : 0)) {
     throw InvalidGenerationSourceErrorWithTodo(
-      'The Union class must contain only named factory constructors or "const ${unionClass.displayName}._()" constructor.',
+      'The Union class must contain only public named factory constructors or "const ${unionClass.displayName}._()" constructor.',
       todo: 'Delete other constructors.',
       element: unionClass,
     );
