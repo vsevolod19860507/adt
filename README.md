@@ -67,6 +67,12 @@ You can freely apply generics to your `DataClassName<T> with _$DataClassName<T>`
 [Data class example](https://github.com/vr19860507/adt/blob/master/example/lib/data_class.dart)
 
 ## Union
-_Description will be soon..._
+The discriminated union is a class that can be in one of several possible states, each state can contain data. It creates `==`, `hashCode`, `toString`, `match`, `matchOrDefault`. `==` and `hashCode` allow to compare states of a union as values, `toString` gives you a string representation of current state, `match` and `matchOrDefault` are something like switch but guarantees that all cases will be handled.
+
+To create a union, use the `@union` annotation on `UnionName` and add some public named factory constructors with zero or one positional parameter. every factory constructor must redirect `const factory UnionName.case1(String value) = _$UnionName.case1;`. For private unions `_UnionName` use next `const factory _UnionName.case1(String value) = _$_UnionName.case1;`. Also you can apply generics to your `UnionName<T>` with such constructor `const factory UnionName.case1(String value) = _$UnionName<T>.case1;`.
+
+You can use `@nullable` and `@Default()` annotations, to allows null `const factory UnionName.case1(@nullable int value) = _$UnionName.case1;` or add a default value `const factory UnionName.case1([@Default(7) int value]) = _$UnionName.case1;`.
+
+If you want use some custom fields or methods, you have to add const private constructor to your union `const UnionName._()`
 
 [Union example](https://github.com/vr19860507/adt/blob/master/example/lib/union.dart)
