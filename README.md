@@ -64,7 +64,9 @@ You can place the fields corresponding to the constructor parameters either in t
 
 You can freely apply generics to your `DataClassName<T> with _$DataClassName<T>` and also add any other members to a data class, such as other fields, methods, etc. You can also inherit, implement, and use mixins.
 
-[Example](https://github.com/vr19860507/adt/blob/master/example/lib/data_class.dart)
+[Data class example](https://github.com/vr19860507/adt/blob/master/example/lib/data_class.dart)
 
 ## Union
 _Description will be soon..._
+
+[Union example](https://github.com/vr19860507/adt/blob/master/example/lib/union.dart)

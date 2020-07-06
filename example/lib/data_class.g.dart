@@ -2,7 +2,7 @@
 
 part of 'data_class.dart';
 
-// ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_parenthesis, unused_element,
+// ignore_for_file: avoid_init_to_null, unnecessary_brace_in_string_interps, unnecessary_parenthesis, unused_element,
 
 // **************************************************************************
 // ADTGenerator

@@ -12,6 +12,7 @@ Builder adtGeneratorBuilder(BuilderOptions options) => SharedPartBuilder(
     );
 
 const _ignoreForFile = '// ignore_for_file: '
+    'avoid_init_to_null, '
     'unnecessary_brace_in_string_interps, '
     'unnecessary_parenthesis, '
     'unused_element, '

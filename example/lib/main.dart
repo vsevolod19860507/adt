@@ -1,6 +1,10 @@
 import 'data_class.dart';
+import 'union.dart';
 
 void main() {
+  // ***************************************************************************
+  // Data classes
+  // ***************************************************************************
   const dc1 = DataClass(field1: 7);
   final dc2 = dc1.copyWith(field1: 1);
   final dc3 = dc1.copyWith(field1: 1, field2: null);
@@ -43,4 +47,88 @@ void main() {
   final mcdc1 = MultipleConstructorDataClass(7);
   print(mcdc1); // MultipleConstructorDataClass(field1: 7)
   print(mcdc1.showCreationDate()); // year: 2020, month: 7 day: 4
+
+  // ***************************************************************************
+  // Unions
+  // ***************************************************************************
+  const u1 = Union.case1();
+  const u2 = Union.case2(7);
+  const u3 = Union.case3('A');
+  const u4 = Union.case1();
+  const u5 = Union.case3('A');
+  print(u1.hashCode); // 9793584
+  print(u2.hashCode); // 1471274145
+  print(u3.hashCode); // 878724698
+  print(u4.hashCode); // 9793584
+  print(u5.hashCode); // 878724698
+  print(u1 == u2); // false
+  print(u2 == u3); // false
+  print(u1 == u4); // true
+  print(u3 == u5); // true
+  print(u1); // Union.case1()
+  print(u2); // Union.case2(7)
+  print(u3); // Union.case3(A)
+  final u1m = u1.match(
+    case1: () => 'case1()',
+    case2: (x) => 'case2($x)',
+    case3: (x) => 'case3($x)',
+  );
+  final u2m = u2.match(
+    case1: () => 'case1()',
+    case2: (x) => 'case2($x)',
+    case3: (x) => 'case3($x)',
+  );
+  final u3m = u3.match(
+    case1: () => 'case1()',
+    case2: (x) => 'case2($x)',
+    case3: (x) => 'case3($x)',
+  );
+  print(u1m); // case1()
+  print(u2m); // case2(7)
+  print(u3m); // case2(A)
+  final u1mod = u1.matchOrDefault(
+    case2: (x) => 'case2($x)',
+    orDefault: () => 'orDefault',
+  );
+  final u2mod = u2.matchOrDefault(
+    case2: (x) => 'case2($x)',
+    orDefault: () => 'orDefault',
+  );
+  final u3mod = u3.matchOrDefault(
+    case2: (x) => 'case2($x)',
+    orDefault: () => 'orDefault',
+  );
+  print(u1mod); // orDefault
+  print(u2mod); // case2(7)
+  print(u3mod); // orDefault
+
+  const uwnv1 = UnionWithNullableValue.case1();
+  const uwnv2 = UnionWithNullableValue.case2(null);
+  print(uwnv1); // UnionWithNullableValue.case1(null)
+  print(uwnv2); // UnionWithNullableValue.case2(null)
+
+  const uwdv1 = UnionWithDefaultValue.case1();
+  const uwdv2 = UnionWithDefaultValue.case2();
+  const uwdv3 = UnionWithDefaultValue.case3(null);
+  const uwdv4 = UnionWithDefaultValue.case3();
+  const uwdv5 = UnionWithDefaultValue.case3(3);
+  print(uwdv1); // UnionWithDefaultValue.case1(null)
+  print(uwdv2); // UnionWithDefaultValue.case2(7)
+  print(uwdv3); // UnionWithDefaultValue.case3(null)
+  print(uwdv4); // UnionWithDefaultValue.case3(7)
+  print(uwdv5); // UnionWithDefaultValue.case3(3)
+
+  const gu1 = GenericUnion.case1(1);
+  const gu2 = GenericUnion<int, List<int>>.case2([1]);
+  const gu3 = GenericUnion<int, List<int>>.case3();
+  print(gu1); // GenericUnion<int, Iterable<int>>.case1(1)
+  print(gu2); // GenericUnion<int, List<int>>.case2([1])
+  print(gu3); // GenericUnion<int, List<int>>.case3()
+
+  // const pu1 = _PrivateUnion.case1();
+  // const pu2 = _PrivateUnion.case2(7);
+
+  const uwam1 = UnionWithAdditionalMembers.case1();
+  print(uwam1.field1); // 7
+  print(uwam1.meth()); // 14
 }

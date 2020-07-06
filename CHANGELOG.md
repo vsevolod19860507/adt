@@ -1,6 +1,18 @@
+## [0.3.0] - Jul 06, 2020
+
+* Internal fixes.
+* Fixed example.
+* Fixed README.md
+* Fixed CHANGELOG.md.
+
 ## [0.2.0] - Jul 04, 2020
 
 * Internal fixes.
+* Fixed example.
+
+## [0.1.0+2] - Jul 04, 2020
+
+* Fixed README.md
 * Fixed example.
 
 ## [0.1.0+1] - Jul 04, 2020
@@ -19,7 +31,7 @@
 
 * Fixed README.md
 
-## [0.0.1+7] - Jul 01, 2020
+## [0.0.1+7] - Jun 30, 2020
 
 * Internal fixes.
 

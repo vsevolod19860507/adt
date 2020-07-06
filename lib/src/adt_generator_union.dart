@@ -9,11 +9,13 @@ class ClassInfo {
   final String name;
   final Iterable<TypeParameterInfo> typeParameters;
   final Iterable<ConstructorInfo> constructors;
+  final bool mayHaveAdditionalMembers;
 
   const ClassInfo({
     @required this.name,
     @required this.typeParameters,
     @required this.constructors,
+    @required this.mayHaveAdditionalMembers,
   });
 }
 
@@ -60,30 +62,30 @@ String generateUnionClass(Element element) {
   final unionClass = element as ClassElement;
 
   final constructors = unionClass.constructors
-      .where((c) => c.isFactory && c.name.replaceAll('_', '').isNotEmpty);
+      .where((c) => c.isFactory && c.isPublic && c.name.isNotEmpty);
 
   if (constructors.isEmpty) {
     throw InvalidGenerationSourceErrorWithTodo(
-      'The Union class must contain at least one named factory constructor. The name must contain at least one character other than "_".',
+      'The Union class must contain at least one named factory constructor.',
       todo: 'Add a named factory constructor.',
       element: unionClass,
     );
   }
 
+  final mayHaveAdditionalMembers = unionClass.constructors
+      .where((c) => c.isConst && c.name == '_' && c.parameters.isEmpty)
+      .isNotEmpty;
+
+  if (unionClass.constructors.length >
+      constructors.length + (mayHaveAdditionalMembers ? 1 : 0)) {
+    throw InvalidGenerationSourceErrorWithTodo(
+      'The Union class must contain only named factory constructors or "const ${unionClass.displayName}._()" constructor.',
+      todo: 'Delete other constructors.',
+      element: unionClass,
+    );
+  }
+
   final constructorsInfo = constructors.map((c) {
-    final constructorName = clearUnderscores(c.name);
-
-    if (constructors
-            .where((c2) => clearUnderscores(c2.name) == constructorName)
-            .length >
-        1) {
-      throw InvalidGenerationSourceErrorWithTodo(
-        'Each factory constructor must have a unique name. "${c.name}", "_${c.name}", "__${c.name}", etc. are considered the same.',
-        todo: 'Use a unique name.',
-        element: c,
-      );
-    }
-
     if (c.parameters.length > 1) {
       throw InvalidGenerationSourceErrorWithTodo(
         'Each factory constructor must contain zero or one parameter.',
@@ -98,7 +100,7 @@ String generateUnionClass(Element element) {
 
             if (parameter.isNamed) {
               throw InvalidGenerationSourceErrorWithTodo(
-                'The union class can contain only a required or optional positional parameter.',
+                'The factory constructor can contain only a required or optional positional parameter.',
                 todo: 'Make this parameter positional.',
                 element: parameter,
               );
@@ -117,7 +119,7 @@ String generateUnionClass(Element element) {
             final defaultValueRaw = defaultAnnotation?.substring(
                 '@Default('.length, defaultAnnotation.length - 1);
 
-            final defaultValue = defaultAnnotation != null &&
+            final defaultValue = defaultValueRaw != null &&
                     !defaultValueRaw.startsWith('const ') &&
                     (defaultValueRaw.endsWith(')') ||
                         defaultValueRaw.endsWith(']') ||
@@ -162,7 +164,7 @@ String generateUnionClass(Element element) {
         : null;
 
     return ConstructorInfo(
-      name: constructorName,
+      name: c.name,
       parameter: parameter,
     );
   });
@@ -177,6 +179,7 @@ String generateUnionClass(Element element) {
     name: unionClass.displayName,
     typeParameters: typeParameters,
     constructors: constructorsInfo,
+    mayHaveAdditionalMembers: mayHaveAdditionalMembers,
   );
 
   return createUnionClass(classInfo);
@@ -245,37 +248,50 @@ String createUnionClass(ClassInfo classInfo) {
       ..abstract = true
       ..name = unionClassBehindName
       ..types.addAll(typeParametersWithBounds)
-      ..implements.add(classNameWithTypeParameters)
-      ..constructors.addAll(classInfo.constructors.map((c) {
-        final parameter = c.parameter != null
-            ? [
-                Parameter(
-                  (b) => b
-                    ..name = c.parameter.name
-                    ..type = Reference(c.parameter.type),
-                )
-              ]
-            : <Parameter>[];
+      ..implements.addAll([
+        if (!classInfo.mayHaveAdditionalMembers) classNameWithTypeParameters
+      ])
+      ..extend = classInfo.mayHaveAdditionalMembers
+          ? classNameWithTypeParameters
+          : null
+      ..constructors.addAll([
+        if (classInfo.mayHaveAdditionalMembers)
+          Constructor(
+            (b) => b
+              ..constant = true
+              ..initializers.add(const Code('super._()')),
+          ),
+        ...classInfo.constructors.map((c) {
+          final parameter = c.parameter != null
+              ? [
+                  Parameter(
+                    (b) => b
+                      ..name = c.parameter.name
+                      ..type = Reference(c.parameter.type),
+                  )
+                ]
+              : <Parameter>[];
 
-        final isOptional = c.parameter?.isOptional ?? false;
+          final isOptional = c.parameter?.isOptional ?? false;
 
-        return Constructor(
-          (b) => b
-            ..constant = true
-            ..name = c.name
-            ..factory = true
-            ..redirect = TypeReference(
-              (b) => b
-                ..symbol = getUionCaseName(
-                  unionClassBehindName: unionClassBehindName,
-                  constructorName: c.name,
-                )
-                ..types.addAll(typeParameters),
-            )
-            ..requiredParameters.addAll([if (!isOptional) ...parameter])
-            ..optionalParameters.addAll([if (isOptional) ...parameter]),
-        );
-      }))
+          return Constructor(
+            (b) => b
+              ..constant = true
+              ..name = c.name
+              ..factory = true
+              ..redirect = TypeReference(
+                (b) => b
+                  ..symbol = getUionCaseName(
+                    unionClassBehindName: unionClassBehindName,
+                    constructorName: c.name,
+                  )
+                  ..types.addAll(typeParameters),
+              )
+              ..requiredParameters.addAll([if (!isOptional) ...parameter])
+              ..optionalParameters.addAll([if (isOptional) ...parameter]),
+          );
+        })
+      ])
       ..methods.addAll([
         createMatchForClassBehind(classInfo),
         createMatchForClassBehind(classInfo, hasDefault: true),
@@ -319,7 +335,13 @@ String createUnionClass(ClassInfo classInfo) {
       (b) => b
         ..name = uionCaseName
         ..types.addAll(typeParametersWithBounds)
-        ..implements.add(unionClassBehindNameWithTypeParameters)
+        ..implements.addAll([
+          if (!classInfo.mayHaveAdditionalMembers)
+            unionClassBehindNameWithTypeParameters
+        ])
+        ..extend = classInfo.mayHaveAdditionalMembers
+            ? unionClassBehindNameWithTypeParameters
+            : null
         ..constructors.add(Constructor(
           (b) => b
             ..constant = true
@@ -348,9 +370,6 @@ String createUnionClass(ClassInfo classInfo) {
 
   return header + unionClassExtension + unionClassBehind + unionCases;
 }
-
-String clearUnderscores(String name) =>
-    name.startsWith('_') ? clearUnderscores(name.replaceFirst('_', '')) : name;
 
 String getUionCaseName({String unionClassBehindName, String constructorName}) =>
     '$unionClassBehindName\$$constructorName';
@@ -386,12 +405,10 @@ Method createEquals(
 ) {
   final bodyFirstPart = const Reference('identical')
       .call([const Reference('this'), const Reference('other')]).or(
-          const Reference('other').isA(classNameWithTypeParameters)
-          // .and(const Reference('identical').call([
-          //   const Reference('this').property('runtimeType'),
-          //   const Reference('other').property('runtimeType')
-          // ]))
-          );
+          const Reference('identical').call([
+    const Reference('runtimeType'),
+    const Reference('other').property('runtimeType'),
+  ]).and(const Reference('other').isA(classNameWithTypeParameters)));
 
   final body = (constructor.parameter != null
           ? bodyFirstPart.and(const Reference('DeepCollectionEquality')
