@@ -12,10 +12,10 @@ You should install three packages as dependencies:
 
 ```yaml
 dependencies:
-  adt_annotation: ^0.1.0
+  adt_annotation: ^0.2.0
 
 dev_dependencies:
-  adt: ^0.3.0
+  adt: ^0.4.0
   build_runner: ^1.10.0
 ```
 
@@ -45,15 +45,6 @@ class Status {
 
 Finally, run the generator by writing at the command prompt `flutter pub run build_runner build` for Flutter project, or `pub run build_runner build` for other projects.
 See [build_runner](https://pub.dev/packages/build_runner) for more details.
-
-
-**Now there is a [bug](https://github.com/dart-lang/sdk/issues/42218) in the analyzer, to fix it, add the following to your [`analysis_options.yaml`](https://dart.dev/guides/language/analysis-options).**
-
-```yaml
-analyzer:
-  errors:
-    const_constructor_with_mixin_with_field: ignore
-```
 
 ## Data class
 The data class сontains fields that are used in `==`, `hashCode`, `toString`, `copyWith` which it creates for you. `==` and `hashCode` allow to compare objects as values, `toString` gives you a string representation of this object, `copyWith` method allows you to create a copy of an object with the ability to change fields values. You can always manually override them if you want. 

@@ -1,3 +1,11 @@
+## [0.4.0] - Aug 07, 2020
+
+* The minimum version of Dart SDK is now 2.9.
+* Updated dependencies
+* Fixed README.md
+* Fixed example.
+* Internal fixes.
+
 ## [0.3.0+3] - Jul 06, 2020
 
 * Fixed README.md

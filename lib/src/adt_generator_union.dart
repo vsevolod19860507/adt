@@ -404,11 +404,12 @@ Method createEquals(
   TypeReference classNameWithTypeParameters,
 ) {
   final bodyFirstPart = const Reference('identical')
-      .call([const Reference('this'), const Reference('other')]).or(
-          const Reference('identical').call([
-    const Reference('runtimeType'),
-    const Reference('other').property('runtimeType'),
-  ]).and(const Reference('other').isA(classNameWithTypeParameters)));
+      .call([const Reference('this'), const Reference('other')])
+      .or(const Reference('other').isA(classNameWithTypeParameters))
+      .and(const Reference('identical').call([
+        const Reference('runtimeType'),
+        const Reference('other').property('runtimeType'),
+      ]));
 
   final body = (constructor.parameter != null
           ? bodyFirstPart.and(const Reference('DeepCollectionEquality')

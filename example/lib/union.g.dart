@@ -71,7 +71,7 @@ class _$Union$case1 implements _$Union {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) && other is _$Union$case1;
+      other is _$Union$case1 && identical(runtimeType, other.runtimeType);
   @override
   int get hashCode => runtimeType.hashCode;
   @override
@@ -99,8 +99,8 @@ class _$Union$case2 implements _$Union {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$Union$case2 &&
+      other is _$Union$case2 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -130,8 +130,8 @@ class _$Union$case3 implements _$Union {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$Union$case3 &&
+      other is _$Union$case3 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -198,8 +198,8 @@ class _$UnionWithNullableValue$case1 implements _$UnionWithNullableValue {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithNullableValue$case1 &&
+      other is _$UnionWithNullableValue$case1 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -227,8 +227,8 @@ class _$UnionWithNullableValue$case2 implements _$UnionWithNullableValue {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithNullableValue$case2 &&
+      other is _$UnionWithNullableValue$case2 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -306,8 +306,8 @@ class _$UnionWithDefaultValue$case1 implements _$UnionWithDefaultValue {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithDefaultValue$case1 &&
+      other is _$UnionWithDefaultValue$case1 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -337,8 +337,8 @@ class _$UnionWithDefaultValue$case2 implements _$UnionWithDefaultValue {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithDefaultValue$case2 &&
+      other is _$UnionWithDefaultValue$case2 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -368,8 +368,8 @@ class _$UnionWithDefaultValue$case3 implements _$UnionWithDefaultValue {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithDefaultValue$case3 &&
+      other is _$UnionWithDefaultValue$case3 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -446,8 +446,8 @@ class _$GenericUnion$case1<T, S extends Iterable<T>>
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$GenericUnion$case1<T, S> &&
+      other is _$GenericUnion$case1<T, S> &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -478,8 +478,8 @@ class _$GenericUnion$case2<T, S extends Iterable<T>>
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$GenericUnion$case2<T, S> &&
+      other is _$GenericUnion$case2<T, S> &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -508,8 +508,8 @@ class _$GenericUnion$case3<T, S extends Iterable<T>>
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$GenericUnion$case3<T, S>;
+      other is _$GenericUnion$case3<T, S> &&
+          identical(runtimeType, other.runtimeType);
   @override
   int get hashCode => runtimeType.hashCode;
   @override
@@ -570,8 +570,8 @@ class _$_PrivateUnion$value1 implements _$_PrivateUnion {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$_PrivateUnion$value1;
+      other is _$_PrivateUnion$value1 &&
+          identical(runtimeType, other.runtimeType);
   @override
   int get hashCode => runtimeType.hashCode;
   @override
@@ -597,8 +597,8 @@ class _$_PrivateUnion$value2 implements _$_PrivateUnion {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$_PrivateUnion$value2 &&
+      other is _$_PrivateUnion$value2 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -676,8 +676,8 @@ class _$UnionWithAdditionalMembers$case1 extends _$UnionWithAdditionalMembers {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithAdditionalMembers$case1;
+      other is _$UnionWithAdditionalMembers$case1 &&
+          identical(runtimeType, other.runtimeType);
   @override
   int get hashCode => runtimeType.hashCode;
   @override
@@ -705,8 +705,8 @@ class _$UnionWithAdditionalMembers$case2 extends _$UnionWithAdditionalMembers {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithAdditionalMembers$case2 &&
+      other is _$UnionWithAdditionalMembers$case2 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>
@@ -736,8 +736,8 @@ class _$UnionWithAdditionalMembers$case3 extends _$UnionWithAdditionalMembers {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      identical(runtimeType, other.runtimeType) &&
-          other is _$UnionWithAdditionalMembers$case3 &&
+      other is _$UnionWithAdditionalMembers$case3 &&
+          identical(runtimeType, other.runtimeType) &&
           const DeepCollectionEquality().equals([value], [other.value]);
   @override
   int get hashCode =>

@@ -1,5 +1,1 @@
 include: package:strict_analyzer/analysis_options.yaml
-
-analyzer:
-  errors:
-    const_constructor_with_mixin_with_field: ignore

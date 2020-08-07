@@ -7,7 +7,7 @@ void main() {
   // ***************************************************************************
   const dc1 = DataClass(field1: 7);
   final dc2 = dc1.copyWith(field1: 1);
-  final dc3 = dc1.copyWith(field1: 1, field2: null);
+  final dc3 = dc1.copyWith(field1: 1);
   print(dc1.hashCode); // 1286781335
   print(dc2.hashCode); // 119482181
   print(dc3.hashCode); // 119482181

@@ -251,9 +251,7 @@ Method createHashCode(ClassInfo classInfo) {
             .property('hash')
             .call([
               literalList([
-                const Reference('\$this')
-                    .property('runtimeType')
-                    .property('hashCode'),
+                const Reference('runtimeType').property('hashCode'),
                 ...classInfo.constructor.parameters
                     .map((p) => const Reference('\$this').property(p.name))
               ]),
@@ -283,21 +281,19 @@ Method createEquals(
         const Reference('_this').assignFinal('\$this').statement,
         const Reference('identical')
             .call([const Reference('this'), const Reference('other')])
-            .or(const Reference('identical')
+            .or(const Reference('other').isA(classNameWithTypeParameters))
+            .and(const Reference('identical').call([
+              const Reference('runtimeType'),
+              const Reference('other').property('runtimeType')
+            ]).and(const Reference('DeepCollectionEquality')
+                .constInstance([])
+                .property('equals')
                 .call([
-                  const Reference('\$this').property('runtimeType'),
-                  const Reference('other').property('runtimeType')
-                ])
-                .and(const Reference('other').isA(classNameWithTypeParameters))
-                .and(const Reference('DeepCollectionEquality')
-                    .constInstance([])
-                    .property('equals')
-                    .call([
-                      literalList(classInfo.constructor.parameters.map(
-                          (p) => const Reference('\$this').property(p.name))),
-                      literalList(classInfo.constructor.parameters.map(
-                          (p) => const Reference('other').property(p.name))),
-                    ])))
+                  literalList(classInfo.constructor.parameters
+                      .map((p) => const Reference('\$this').property(p.name))),
+                  literalList(classInfo.constructor.parameters
+                      .map((p) => const Reference('other').property(p.name))),
+                ])))
             .returned
             .statement
       ]),
