@@ -67,3 +67,5 @@ You can use `@nullable` and `@Default()` annotations, to allows null `const fact
 If you want use some custom fields or methods, you have to add const private constructor to your union `const UnionName._()`
 
 [Union example](https://github.com/vr19860507/adt/blob/master/example/lib/union.dart)
+
+If you need immutable collections, you can find them [here](https://pub.dev/packages/immutable_collection).
