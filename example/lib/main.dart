@@ -13,7 +13,7 @@ void main() {
   print(dc3.hashCode); // 119482181
   print(dc1 == dc2); // false
   print(dc1 == dc3); // false
-  print(dc2 == dc2); // true
+  print(dc2 == dc3); // true
   print(dc1); // DataClass(field1: 7, field2: default value)
   print(dc2); // DataClass(field1: 1, field2: default value)
   print(dc3); // DataClass(field1: 1, field2: default value)
