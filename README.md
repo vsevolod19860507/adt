@@ -15,7 +15,7 @@ dependencies:
   adt_annotation: ^0.2.0
 
 dev_dependencies:
-  build_runner: ^1.10.0
+  build_runner: ^1.0.0
   adt: ^0.4.0
 ```
 
