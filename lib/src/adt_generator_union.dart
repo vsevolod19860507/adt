@@ -323,7 +323,7 @@ String createUnionClass(ClassInfo classInfo) {
             Parameter(
               (b) => b
                 ..toThis = true
-                ..name = c.parameter.name
+                ..name = '_${c.parameter.name}'
                 ..defaultTo = Code(c.parameter.defaultValue),
             )
           ]
@@ -349,7 +349,8 @@ String createUnionClass(ClassInfo classInfo) {
             ..optionalParameters.addAll([if (isOptional) ...parameter])
             ..initializers.addAll([
               if (c.parameter != null && !c.parameter.isNullable)
-                CodeExpression(Code('assert(${c.parameter.name} != null)')).code
+                CodeExpression(Code('assert(_${c.parameter.name} != null)'))
+                    .code
             ]),
         ))
         ..fields.addAll([
@@ -357,7 +358,7 @@ String createUnionClass(ClassInfo classInfo) {
             Field(
               (b) => b
                 ..type = Reference(c.parameter.type)
-                ..name = c.parameter.name
+                ..name = '_${c.parameter.name}'
                 ..modifier = FieldModifier.final$,
             )
         ])
@@ -382,7 +383,7 @@ Method createHashCode(ConstructorInfo constructor) {
               .call([
                 literalList([
                   const Reference('runtimeType').property('hashCode'),
-                  Reference(constructor.parameter.name),
+                  Reference('_${constructor.parameter.name}'),
                 ]),
               ])
           : const Reference('runtimeType').property('hashCode'))
@@ -416,9 +417,10 @@ Method createEquals(
               .constInstance([])
               .property('equals')
               .call([
-                literalList([Reference(constructor.parameter.name)]),
+                literalList([Reference('_${constructor.parameter.name}')]),
                 literalList([
-                  const Reference('other').property(constructor.parameter.name)
+                  const Reference('other')
+                      .property('_${constructor.parameter.name}')
                 ]),
               ]))
           : bodyFirstPart)
@@ -453,7 +455,7 @@ Method createToString(
   final constructorName = escape$(constructor.name);
 
   final parameterName =
-      constructor.parameter != null ? '\${${constructor.parameter.name}}' : '';
+      constructor.parameter != null ? '\${_${constructor.parameter.name}}' : '';
 
   final returnString = classInfo.typeParameters.isNotEmpty
       ? '\'$className<$typeParametersString>.$constructorName($parameterName)\''
@@ -532,7 +534,8 @@ Method createMatchForUnionCase(
   bool hasDefault = false,
 }) {
   final callThisCase = Reference(constructor.name).call([
-    if (constructor.parameter != null) Reference(constructor.parameter.name)
+    if (constructor.parameter != null)
+      Reference('_${constructor.parameter.name}')
   ]);
 
   return Method(

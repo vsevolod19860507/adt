@@ -79,65 +79,65 @@ class _$Union$case1 implements _$Union {
 }
 
 class _$Union$case2 implements _$Union {
-  const _$Union$case2(this.value) : assert(value != null);
+  const _$Union$case2(this._value) : assert(_value != null);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function() case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(String) case3}) =>
-      case2(value);
+      case2(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function() case1,
           ReturnType Function(int) case2,
           ReturnType Function(String) case3,
           @required ReturnType Function() orDefault}) =>
-      case2 != null ? case2(value) : orDefault();
+      case2 != null ? case2(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$Union$case2 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'Union.case2(${value})';
+  String toString() => 'Union.case2(${_value})';
 }
 
 class _$Union$case3 implements _$Union {
-  const _$Union$case3(this.value) : assert(value != null);
+  const _$Union$case3(this._value) : assert(_value != null);
 
-  final String value;
+  final String _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function() case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(String) case3}) =>
-      case3(value);
+      case3(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function() case1,
           ReturnType Function(int) case2,
           ReturnType Function(String) case3,
           @required ReturnType Function() orDefault}) =>
-      case3 != null ? case3(value) : orDefault();
+      case3 != null ? case3(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$Union$case3 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'Union.case3(${value})';
+  String toString() => 'Union.case3(${_value})';
 }
 
 // *****************************************************************************
@@ -180,61 +180,61 @@ abstract class _$UnionWithNullableValue implements UnionWithNullableValue {
 }
 
 class _$UnionWithNullableValue$case1 implements _$UnionWithNullableValue {
-  const _$UnionWithNullableValue$case1([this.value = null]);
+  const _$UnionWithNullableValue$case1([this._value = null]);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(int) case1,
           @required ReturnType Function(int) case2}) =>
-      case1(value);
+      case1(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(int) case1,
           ReturnType Function(int) case2,
           @required ReturnType Function() orDefault}) =>
-      case1 != null ? case1(value) : orDefault();
+      case1 != null ? case1(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithNullableValue$case1 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithNullableValue.case1(${value})';
+  String toString() => 'UnionWithNullableValue.case1(${_value})';
 }
 
 class _$UnionWithNullableValue$case2 implements _$UnionWithNullableValue {
-  const _$UnionWithNullableValue$case2(this.value);
+  const _$UnionWithNullableValue$case2(this._value);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(int) case1,
           @required ReturnType Function(int) case2}) =>
-      case2(value);
+      case2(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(int) case1,
           ReturnType Function(int) case2,
           @required ReturnType Function() orDefault}) =>
-      case2 != null ? case2(value) : orDefault();
+      case2 != null ? case2(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithNullableValue$case2 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithNullableValue.case2(${value})';
+  String toString() => 'UnionWithNullableValue.case2(${_value})';
 }
 
 // *****************************************************************************
@@ -286,96 +286,97 @@ abstract class _$UnionWithDefaultValue implements UnionWithDefaultValue {
 }
 
 class _$UnionWithDefaultValue$case1 implements _$UnionWithDefaultValue {
-  const _$UnionWithDefaultValue$case1([this.value = null]);
+  const _$UnionWithDefaultValue$case1([this._value = null]);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(int) case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(int) case3}) =>
-      case1(value);
+      case1(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(int) case1,
           ReturnType Function(int) case2,
           ReturnType Function(int) case3,
           @required ReturnType Function() orDefault}) =>
-      case1 != null ? case1(value) : orDefault();
+      case1 != null ? case1(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithDefaultValue$case1 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithDefaultValue.case1(${value})';
+  String toString() => 'UnionWithDefaultValue.case1(${_value})';
 }
 
 class _$UnionWithDefaultValue$case2 implements _$UnionWithDefaultValue {
-  const _$UnionWithDefaultValue$case2([this.value = 7]) : assert(value != null);
+  const _$UnionWithDefaultValue$case2([this._value = 7])
+      : assert(_value != null);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(int) case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(int) case3}) =>
-      case2(value);
+      case2(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(int) case1,
           ReturnType Function(int) case2,
           ReturnType Function(int) case3,
           @required ReturnType Function() orDefault}) =>
-      case2 != null ? case2(value) : orDefault();
+      case2 != null ? case2(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithDefaultValue$case2 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithDefaultValue.case2(${value})';
+  String toString() => 'UnionWithDefaultValue.case2(${_value})';
 }
 
 class _$UnionWithDefaultValue$case3 implements _$UnionWithDefaultValue {
-  const _$UnionWithDefaultValue$case3([this.value = 7]);
+  const _$UnionWithDefaultValue$case3([this._value = 7]);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(int) case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(int) case3}) =>
-      case3(value);
+      case3(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(int) case1,
           ReturnType Function(int) case2,
           ReturnType Function(int) case3,
           @required ReturnType Function() orDefault}) =>
-      case3 != null ? case3(value) : orDefault();
+      case3 != null ? case3(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithDefaultValue$case3 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithDefaultValue.case3(${value})';
+  String toString() => 'UnionWithDefaultValue.case3(${_value})';
 }
 
 // *****************************************************************************
@@ -426,66 +427,66 @@ abstract class _$GenericUnion<T, S extends Iterable<T>>
 
 class _$GenericUnion$case1<T, S extends Iterable<T>>
     implements _$GenericUnion<T, S> {
-  const _$GenericUnion$case1(this.value) : assert(value != null);
+  const _$GenericUnion$case1(this._value) : assert(_value != null);
 
-  final T value;
+  final T _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(T) case1,
           @required ReturnType Function(S) case2,
           @required ReturnType Function() case3}) =>
-      case1(value);
+      case1(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(T) case1,
           ReturnType Function(S) case2,
           ReturnType Function() case3,
           @required ReturnType Function() orDefault}) =>
-      case1 != null ? case1(value) : orDefault();
+      case1 != null ? case1(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$GenericUnion$case1<T, S> &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'GenericUnion<${T}, ${S}>.case1(${value})';
+  String toString() => 'GenericUnion<${T}, ${S}>.case1(${_value})';
 }
 
 class _$GenericUnion$case2<T, S extends Iterable<T>>
     implements _$GenericUnion<T, S> {
-  const _$GenericUnion$case2(this.value) : assert(value != null);
+  const _$GenericUnion$case2(this._value) : assert(_value != null);
 
-  final S value;
+  final S _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function(T) case1,
           @required ReturnType Function(S) case2,
           @required ReturnType Function() case3}) =>
-      case2(value);
+      case2(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function(T) case1,
           ReturnType Function(S) case2,
           ReturnType Function() case3,
           @required ReturnType Function() orDefault}) =>
-      case2 != null ? case2(value) : orDefault();
+      case2 != null ? case2(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$GenericUnion$case2<T, S> &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'GenericUnion<${T}, ${S}>.case2(${value})';
+  String toString() => 'GenericUnion<${T}, ${S}>.case2(${_value})';
 }
 
 class _$GenericUnion$case3<T, S extends Iterable<T>>
@@ -579,32 +580,32 @@ class _$_PrivateUnion$value1 implements _$_PrivateUnion {
 }
 
 class _$_PrivateUnion$value2 implements _$_PrivateUnion {
-  const _$_PrivateUnion$value2(this.value) : assert(value != null);
+  const _$_PrivateUnion$value2(this._value) : assert(_value != null);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function() value1,
           @required ReturnType Function(int) value2}) =>
-      value2(value);
+      value2(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function() value1,
           ReturnType Function(int) value2,
           @required ReturnType Function() orDefault}) =>
-      value2 != null ? value2(value) : orDefault();
+      value2 != null ? value2(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$_PrivateUnion$value2 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => '_PrivateUnion.value2(${value})';
+  String toString() => '_PrivateUnion.value2(${_value})';
 }
 
 // *****************************************************************************
@@ -685,63 +686,65 @@ class _$UnionWithAdditionalMembers$case1 extends _$UnionWithAdditionalMembers {
 }
 
 class _$UnionWithAdditionalMembers$case2 extends _$UnionWithAdditionalMembers {
-  const _$UnionWithAdditionalMembers$case2(this.value) : assert(value != null);
+  const _$UnionWithAdditionalMembers$case2(this._value)
+      : assert(_value != null);
 
-  final int value;
+  final int _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function() case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(String) case3}) =>
-      case2(value);
+      case2(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function() case1,
           ReturnType Function(int) case2,
           ReturnType Function(String) case3,
           @required ReturnType Function() orDefault}) =>
-      case2 != null ? case2(value) : orDefault();
+      case2 != null ? case2(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithAdditionalMembers$case2 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithAdditionalMembers.case2(${value})';
+  String toString() => 'UnionWithAdditionalMembers.case2(${_value})';
 }
 
 class _$UnionWithAdditionalMembers$case3 extends _$UnionWithAdditionalMembers {
-  const _$UnionWithAdditionalMembers$case3(this.value) : assert(value != null);
+  const _$UnionWithAdditionalMembers$case3(this._value)
+      : assert(_value != null);
 
-  final String value;
+  final String _value;
 
   @override
   ReturnType match<ReturnType>(
           {@required ReturnType Function() case1,
           @required ReturnType Function(int) case2,
           @required ReturnType Function(String) case3}) =>
-      case3(value);
+      case3(_value);
   @override
   ReturnType matchOrDefault<ReturnType>(
           {ReturnType Function() case1,
           ReturnType Function(int) case2,
           ReturnType Function(String) case3,
           @required ReturnType Function() orDefault}) =>
-      case3 != null ? case3(value) : orDefault();
+      case3 != null ? case3(_value) : orDefault();
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _$UnionWithAdditionalMembers$case3 &&
           identical(runtimeType, other.runtimeType) &&
-          const DeepCollectionEquality().equals([value], [other.value]);
+          const DeepCollectionEquality().equals([_value], [other._value]);
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash([runtimeType.hashCode, value]);
+      const DeepCollectionEquality().hash([runtimeType.hashCode, _value]);
   @override
-  String toString() => 'UnionWithAdditionalMembers.case3(${value})';
+  String toString() => 'UnionWithAdditionalMembers.case3(${_value})';
 }
