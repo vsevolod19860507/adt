@@ -15,8 +15,8 @@ dependencies:
   adt_annotation: ^0.2.0
 
 dev_dependencies:
-  adt: ^0.4.0
   build_runner: ^1.10.0
+  adt: ^0.4.0
 ```
 
 Then, in the file for which you want to generate the code, add the following:
