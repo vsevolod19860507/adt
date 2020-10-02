@@ -12,11 +12,11 @@ You should install three packages as dependencies:
 
 ```yaml
 dependencies:
-  adt_annotation: ^0.2.0
+  adt_annotation: ^0.3.0
 
 dev_dependencies:
   build_runner: ^1.0.0
-  adt: ^0.4.0
+  adt: ^0.5.0
 ```
 
 Then, in the file for which you want to generate the code, add the following:

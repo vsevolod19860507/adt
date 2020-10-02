@@ -126,7 +126,7 @@ String generateDataClass(Element element) {
 
     return ParameterInfo(
       name: p.name,
-      type: p.type.getDisplayString(),
+      type: p.type.getDisplayString(withNullability: false),
       isRequired: isRequired,
       isNamed: p.isNamed,
       isNullable: isNullable,
@@ -135,7 +135,7 @@ String generateDataClass(Element element) {
 
   final typeParameters = dataClass.typeParameters.map((tp) => TypeParameterInfo(
         name: tp.displayName,
-        bound: tp.bound != null ? tp.bound.toString() : '',
+        bound: tp.bound?.getDisplayString(withNullability: false) ?? '',
       ));
 
   final isMutable = dataClass.metadata.any((e) => e.element.name == 'mutable');

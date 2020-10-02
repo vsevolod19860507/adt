@@ -112,7 +112,10 @@ String generateUnionClass(Element element) {
             final isOptional = parameter.isOptionalPositional;
 
             final defaultAnnotation = parameter.metadata
-                .firstWhere((m) => m.toString().startsWith('@Default '),
+                .firstWhere(
+                    (m) => m.element
+                        .getDisplayString(withNullability: false)
+                        .startsWith('Default '),
                     orElse: () => null)
                 ?.toSource();
 
@@ -155,7 +158,7 @@ String generateUnionClass(Element element) {
 
             return ParameterInfo(
               name: parameter.name,
-              type: parameter.type.getDisplayString(),
+              type: parameter.type.getDisplayString(withNullability: false),
               defaultValue: defaultValue,
               isNullable: isNullable,
               isOptional: isOptional,
@@ -172,7 +175,7 @@ String generateUnionClass(Element element) {
   final typeParameters =
       unionClass.typeParameters.map((tp) => TypeParameterInfo(
             name: tp.displayName,
-            bound: tp.bound != null ? tp.bound.toString() : '',
+            bound: tp.bound?.getDisplayString(withNullability: false) ?? '',
           ));
 
   final classInfo = ClassInfo(
