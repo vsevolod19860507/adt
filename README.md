@@ -1,4 +1,4 @@
-# Algebraic data types
+# Algebraic data types: data classes and discriminated unions
 
 A code generator for algebraic data types such as immutable data classes with `copyWith` method and immutable discriminated unions with pattern matching. They compare as value types.
 
