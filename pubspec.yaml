@@ -1,6 +1,6 @@
 name: adt
-description: A code generator for algebraic data types such as data classes and discriminated unions.
-version: 0.5.0+2
+description: A code generator for algebraic data types such as immutable data classes with copyWith method and immutable discriminated unions with pattern matching. They compare as value types.
+version: 0.5.0+3
 homepage: https://github.com/vr19860507/adt
 
 environment:
