@@ -1,3 +1,7 @@
+## [0.5.0+4] - Oct 05, 2020
+
+* Fixed README.md (https://github.com/vr19860507/adt/pull/1)
+
 ## [0.5.0+3] - Oct 04, 2020
 
 * Fixed pubspec.yaml
