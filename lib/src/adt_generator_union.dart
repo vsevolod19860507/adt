@@ -221,7 +221,7 @@ String createUnionClass(ClassInfo classInfo) {
       ..types.addAll(typeParameters),
   );
 
-  final emitter = DartEmitterWithFixedConstFactory();
+  final emitter = DartEmitter();
 
   final unionClassExtension = Class(
     (b) => b
