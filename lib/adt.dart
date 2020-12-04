@@ -16,4 +16,6 @@ const _ignoreForFile = '// ignore_for_file: '
     'unnecessary_brace_in_string_interps, '
     'unnecessary_parenthesis, '
     'unused_element, '
+    'lines_longer_than_80_chars, '
+    'avoid_types_on_closure_parameters, '
     '\n\n';

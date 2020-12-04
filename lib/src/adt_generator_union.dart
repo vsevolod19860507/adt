@@ -6,38 +6,32 @@ import 'adt_generator_helpers.dart';
 
 @immutable
 class ClassInfo {
-  final String name;
-  final Iterable<TypeParameterInfo> typeParameters;
-  final Iterable<ConstructorInfo> constructors;
-  final bool mayHaveAdditionalMembers;
-
   const ClassInfo({
     @required this.name,
     @required this.typeParameters,
     @required this.constructors,
     @required this.mayHaveAdditionalMembers,
   });
+
+  final String name;
+  final Iterable<TypeParameterInfo> typeParameters;
+  final Iterable<ConstructorInfo> constructors;
+  final bool mayHaveAdditionalMembers;
 }
 
 @immutable
 class ConstructorInfo {
-  final String name;
-  final ParameterInfo parameter;
-
   const ConstructorInfo({
     @required this.name,
     @required this.parameter,
   });
+
+  final String name;
+  final ParameterInfo parameter;
 }
 
 @immutable
 class ParameterInfo {
-  final String name;
-  final String type;
-  final String defaultValue;
-  final bool isNullable;
-  final bool isOptional;
-
   const ParameterInfo({
     @required this.name,
     @required this.type,
@@ -45,17 +39,23 @@ class ParameterInfo {
     @required this.isNullable,
     @required this.isOptional,
   });
+
+  final String name;
+  final String type;
+  final String defaultValue;
+  final bool isNullable;
+  final bool isOptional;
 }
 
 @immutable
 class TypeParameterInfo {
-  final String name;
-  final String bound;
-
   const TypeParameterInfo({
     @required this.name,
     this.bound,
   });
+
+  final String name;
+  final String bound;
 }
 
 String generateUnionClass(Element element) {
@@ -79,7 +79,8 @@ String generateUnionClass(Element element) {
   if (unionClass.constructors.length >
       constructors.length + (mayHaveAdditionalMembers ? 1 : 0)) {
     throw InvalidGenerationSourceErrorWithTodo(
-      'The Union class must contain only public named factory constructors or "const ${unionClass.displayName}._()" constructor.',
+      'The Union class must contain only public named factory constructors or '
+      '"const ${unionClass.displayName}._()" constructor.',
       todo: 'Delete other constructors.',
       element: unionClass,
     );
@@ -100,7 +101,8 @@ String generateUnionClass(Element element) {
 
             if (parameter.isNamed) {
               throw InvalidGenerationSourceErrorWithTodo(
-                'The factory constructor can contain only a required or optional positional parameter.',
+                'The factory constructor can contain only a required or '
+                'optional positional parameter.',
                 todo: 'Make this parameter positional.',
                 element: parameter,
               );
@@ -133,15 +135,16 @@ String generateUnionClass(Element element) {
             if (!isOptional && defaultValue != null) {
               throw InvalidGenerationSourceErrorWithTodo(
                 'The required parameter must not be annotated with @Default.',
-                todo:
-                    'Remove @Default or make this parameter optional positional.',
+                todo: 'Remove @Default or make this parameter '
+                    'optional positional.',
                 element: parameter,
               );
             }
 
             if (!isNullable && isOptional && defaultValue == null) {
               throw InvalidGenerationSourceErrorWithTodo(
-                'The non-nullable optional positional parameter must be annotated with @Default.',
+                'The non-nullable optional positional parameter must be '
+                'annotated with @Default.',
                 todo:
                     'Add @Default or make this parameter required or nullable.',
                 element: parameter,

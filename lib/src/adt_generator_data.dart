@@ -6,12 +6,6 @@ import 'adt_generator_helpers.dart';
 
 @immutable
 class ClassInfo {
-  final String name;
-  final Iterable<TypeParameterInfo> typeParameters;
-  final bool isPrivate;
-  final bool isMutable;
-  final ConstructorInfo constructor;
-
   const ClassInfo({
     @required this.name,
     @required this.typeParameters,
@@ -19,29 +13,29 @@ class ClassInfo {
     @required this.isMutable,
     @required this.constructor,
   });
+
+  final String name;
+  final Iterable<TypeParameterInfo> typeParameters;
+  final bool isPrivate;
+  final bool isMutable;
+  final ConstructorInfo constructor;
 }
 
 @immutable
 class ConstructorInfo {
-  final String name;
-  final bool isPrivate;
-  final Iterable<ParameterInfo> parameters;
-
   const ConstructorInfo({
     @required this.name,
     @required this.isPrivate,
     @required this.parameters,
   });
+
+  final String name;
+  final bool isPrivate;
+  final Iterable<ParameterInfo> parameters;
 }
 
 @immutable
 class ParameterInfo {
-  final String name;
-  final String type;
-  final bool isRequired;
-  final bool isNamed;
-  final bool isNullable;
-
   const ParameterInfo({
     @required this.name,
     @required this.type,
@@ -49,17 +43,23 @@ class ParameterInfo {
     @required this.isNamed,
     @required this.isNullable,
   });
+
+  final String name;
+  final String type;
+  final bool isRequired;
+  final bool isNamed;
+  final bool isNullable;
 }
 
 @immutable
 class TypeParameterInfo {
-  final String name;
-  final String bound;
-
   const TypeParameterInfo({
     @required this.name,
     this.bound,
   });
+
+  final String name;
+  final String bound;
 }
 
 String generateDataClass(Element element) {
@@ -83,7 +83,8 @@ String generateDataClass(Element element) {
 
   if (primaryConstructors.isEmpty) {
     throw InvalidGenerationSourceErrorWithTodo(
-      'If you use more than one constructor, one of them must be annotated with @primary.',
+      'If you use more than one constructor, '
+      'one of them must be annotated with @primary.',
       todo: 'Add @primary for one of them or leave one constructor.',
       element: dataClass,
     );
@@ -118,8 +119,8 @@ String generateDataClass(Element element) {
     if (!isNullable && !isRequired && !hasDefaultValue) {
       throw InvalidGenerationSourceErrorWithTodo(
         'The non-nullable optional parameter must have a default value.',
-        todo:
-            'Add a default value or make this parameter @nullable, or if it is a named parameter, you may also make it @required.',
+        todo: 'Add a default value or make this parameter @nullable, '
+            'or if it is a named parameter, you may also make it @required.',
         element: p,
       );
     }

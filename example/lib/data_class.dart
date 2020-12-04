@@ -4,53 +4,53 @@ part 'data_class.g.dart';
 
 @data
 class DataClass with _$DataClass {
-  final int field1;
-  final String field2;
-
   const DataClass({
     @required this.field1,
     this.field2 = 'default value',
   })  : assert(field1 != null),
         assert(field2 != null);
+
+  final int field1;
+  final String field2;
 }
 
 @data
 class DataClassWithNullableField with _$DataClassWithNullableField {
-  final int field1;
-  final String field2;
-
   const DataClassWithNullableField({
     @required this.field1,
     @nullable this.field2 = 'default value',
   }) : assert(field1 != null);
+
+  final int field1;
+  final String field2;
 }
 
 @data
 class GenericDataClass<T, S extends Iterable<T>> with _$GenericDataClass<T, S> {
-  final T field1;
-  final S field2;
-
   const GenericDataClass(this.field1, this.field2)
       : assert(field1 != null),
         assert(field2 != null);
+
+  final T field1;
+  final S field2;
 }
 
 @data
 class _PrivateDataClass with _$_PrivateDataClass {
-  final int field1;
-  final String field2;
-
   const _PrivateDataClass(this.field1, [@nullable this.field2])
       : assert(field1 != null);
+
+  final int field1;
+  final String field2;
 }
 
 @data
 class DataClassWithPrivateConstructor with _$DataClassWithPrivateConstructor {
-  final int field1;
-  final String field2;
-
   const DataClassWithPrivateConstructor._(this.field1, [@nullable this.field2])
       : assert(field1 != null);
+
+  final int field1;
+  final String field2;
 
   static MapEntry<DataClassWithPrivateConstructor, DateTime> create(
     int field1, [
@@ -67,11 +67,11 @@ class DataClassWithPrivateConstructor with _$DataClassWithPrivateConstructor {
 @data
 @mutable
 class MutableDataClass with _$MutableDataClass {
-  final int field1;
-  String field2;
-
   MutableDataClass({@required this.field1, @nullable this.field2})
       : assert(field1 != null);
+
+  final int field1;
+  String field2;
 }
 
 abstract class Interface {
@@ -84,10 +84,6 @@ abstract class Interface {
 class MultipleConstructorDataClass extends DataClass
     with _$MultipleConstructorDataClass
     implements Interface {
-  @override
-  final String field3;
-  final DateTime _creationDate;
-
   MultipleConstructorDataClass(int field1) : this._(field1);
 
   @primary
@@ -96,6 +92,11 @@ class MultipleConstructorDataClass extends DataClass
         _creationDate = DateTime.now(),
         super(field1: field1);
 
+  @override
+  final String field3;
+  final DateTime _creationDate;
+
   String showCreationDate() =>
-      'year: ${_creationDate.year}, month: ${_creationDate.month} day: ${_creationDate.day}';
+      'year: ${_creationDate.year}, month: ${_creationDate.month} '
+      'day: ${_creationDate.day}';
 }
